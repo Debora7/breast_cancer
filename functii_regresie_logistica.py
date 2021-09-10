@@ -1,13 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
 
 
 # Functia sigmoid
 def sigmoid(z):
     z = np.array(z)
     g = np.zeros(z.shape)
-
+    # print(z)
     g = 1 / (1 + np.exp(-z))
 
     return g
@@ -60,20 +59,16 @@ def predict(theta, x):
 
 # Functie de normalizare a datelor
 def normalizare(x):
-    x_norm = x
-    mu = np.zeros(x.shape[1])  # val medii din x
-    sigma = np.zeros(x.shape[1])  # deviatia standard din x
-
-    mu = np.vstack((x[0].mean(), x[1].mean()))
-    sigma = np.vstack(x[0].std(ddof=1), x[1].std(ddof=1))
-
-    m = x.shape[1]  # numarul exemplelor de training
-
-    mu_mat = np.multiply(np.ones(m), mu).T
-    sigma_mat = np.multiply(np.ones(sigma), sigma).T
-
-    # aplicam formula normalizarii
-    x_norm = np.subtract(x, mu).T
-    x_norm = x_norm / sigma.T
+    x_norm = np.linalg.norm(x)
+    x_norm = x / x_norm
 
     return x_norm
+
+
+# Functie de afisare a erorii
+def plotConverge(J_history):
+    plt.plot(range(len(J_history)), J_history, 'bo')
+    plt.title('Convergenta functiei eroare')
+    plt.xlabel('Numarul de iteratii')
+    plt.ylabel('Functia eroare')
+    plt.show()

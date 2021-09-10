@@ -44,8 +44,23 @@ print('Cu parametrii theta = [%d, %d] \nEroarea calculata = %.3f' % (test_theta[
 # Initializam parametrii modelului cu zero
 initial_theta = np.zeros(n+1)
 
+# Normalizarea datelor
+x = frl.normalizare(x)
+
 # Setarile algoritmului gradient descent
-iterations = 1000000
-alpha = 0.001
+iterations = 100
+alpha = 0.01
 theta, J_history, theta_history = frl.grad_desc(x, y, initial_theta, alpha, iterations)
-print('Parametrii theta obtinuti cu gradient descent: {:.4f}, {:.4f}, {:.4f}'.format(*theta))
+print('Parametrii theta obtinuti cu gradient descent: {:.4f}, {:.4f}'.format(*theta))
+
+# Realizarea predictiei
+vct = [-4, 1]
+prob = frl.sigmoid(np.dot(vct, theta))
+print('Pentru aria %d, pobabilitatea de boala este: %d' % (vct[0], prob))
+
+# Afisarea functiei de eroare
+frl.plotConverge(J_history)
+
+# Acuratetea pe setul de date
+p = frl.predict(theta, x)
+print('Acuratetea pe setul de antrenare: {:.2f} %'.format(np.mean(p == y) * 100))
