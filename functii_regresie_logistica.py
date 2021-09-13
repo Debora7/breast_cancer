@@ -59,8 +59,10 @@ def predict(theta, x):
 
 # Functie de normalizare a datelor
 def normalizare(x):
-    x_norm = np.linalg.norm(x)
-    x_norm = x / x_norm
+    std = np.std(x)
+    mean = np.mean(x)
+
+    x_norm = (x - mean) / std
 
     return x_norm
 
