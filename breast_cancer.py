@@ -15,13 +15,13 @@ m, n = x.shape
 plt.hist(x[y == 'M'], bins=30)
 plt.xlabel("Aria medie - Malign")
 plt.ylabel("Frecventa")
-# plt.show()
+plt.show()
 
 # bening
 plt.hist(x[y == 'B'], bins=30)
 plt.xlabel("Aria medie - Belign")
 plt.ylabel("Frecventa")
-# plt.show()
+plt.show()
 
 # Functia sigmoid
 z = 0
@@ -45,7 +45,8 @@ print('Cu parametrii theta = [%d, %d] \nEroarea calculata = %.3f' % (test_theta[
 initial_theta = np.zeros(n+1)
 
 # Normalizarea datelor
-x = frl.normalizare(x)
+# x = frl.normalizare(x)  # 40%
+x = frl.norm(x)  # 60%
 
 # Setarile algoritmului gradient descent
 iterations = 100
