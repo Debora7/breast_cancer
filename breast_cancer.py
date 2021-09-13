@@ -55,9 +55,9 @@ theta, J_history, theta_history = frl.grad_desc(x, y, initial_theta, alpha, iter
 print('Parametrii theta obtinuti cu gradient descent: {:.4f}, {:.4f}'.format(*theta))
 
 # Realizarea predictiei
-vct = [-4, 1]
+vct = [0.702, 1]
 prob = frl.sigmoid(np.dot(vct, theta))
-print('Pentru aria %d, pobabilitatea de boala este: %d' % (vct[0], prob))
+print('Pentru aria %.3f, pobabilitatea de boala este: %d' % (vct[0], prob))
 
 # Afisarea functiei de eroare
 frl.plotConverge(J_history)
