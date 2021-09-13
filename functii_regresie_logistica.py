@@ -57,7 +57,7 @@ def predict(theta, x):
     return p
 
 
-# Functie de normalizare a datelor
+# Functie de normalizare a datelor - z-score normalization
 def normalizare(x):
     std = np.std(x)
     mean = np.mean(x)
@@ -74,3 +74,13 @@ def plotConverge(J_history):
     plt.xlabel('Numarul de iteratii')
     plt.ylabel('Functia eroare')
     plt.show()
+
+
+# Functie de normalizare a datelor - min-max normalizaton
+def norm(x):
+    min = np.min(x)
+    max = np.max(x)
+
+    x_norm = (x - min) / (max - min)
+
+    return x_norm
