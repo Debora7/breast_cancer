@@ -24,7 +24,7 @@ y[y == 'M'] = 1
 y[y == 'B'] = 0
 
 # Calcularea erorii
-test_theta = np.array([13, 5, 2, 11, 23])
+test_theta = np.array([13, 5, 2, 11, 1])
 cost = frl.cost(x, y, test_theta)
 print('Cu parametrii theta = [%d, %d, %d, %d, %d]'
       '\nEroarea calculata = %.3f'
@@ -44,7 +44,7 @@ theta, J_history, theta_history = frl.grad_desc(x, y, initial_theta, alpha, iter
 print('Parametrii theta obtinuti cu gradient descent: {:.4f}, {:.4f}'.format(*theta))
 
 # Realizarea predictiei
-vct = [0.702, 0.23, 0.543, 0.4637, 0.23656]
+vct = [0.702, 0.23, 0.543, 0.4637, 1]
 prob = frl.sigmoid(np.dot(vct, theta))
 print('Pentru parametrii %.3f, %.3f, %.3f, %.3f, %.3f, pobabilitatea de boala este: %d'
       % (vct[0], vct[1], vct[2], vct[3], vct[4], prob))
