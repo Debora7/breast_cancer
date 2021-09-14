@@ -5,23 +5,10 @@ import functii_regresie_logistica as frl
 
 # Citirea datelor
 data = pd.read_csv('data.csv')
-x = data[['area_mean']].values
+x = data[['radius_mean', 'texture_mean', 'perimeter_mean', 'area_mean']].values
 y = data[['diagnosis']].values
 m, n = x.shape
 # print(x.shape, y.shape)
-
-# Afisarea datelor
-# malign
-plt.hist(x[y == 'M'], bins=30)
-plt.xlabel("Aria medie - Malign")
-plt.ylabel("Frecventa")
-plt.show()
-
-# bening
-plt.hist(x[y == 'B'], bins=30)
-plt.xlabel("Aria medie - Belign")
-plt.ylabel("Frecventa")
-plt.show()
 
 # Functia sigmoid
 z = 0
@@ -37,9 +24,11 @@ y[y == 'M'] = 1
 y[y == 'B'] = 0
 
 # Calcularea erorii
-test_theta = np.array([13, 5])
+test_theta = np.array([13, 5, 2, 11, 23])
 cost = frl.cost(x, y, test_theta)
-print('Cu parametrii theta = [%d, %d] \nEroarea calculata = %.3f' % (test_theta[0], test_theta[1], cost))
+print('Cu parametrii theta = [%d, %d, %d, %d, %d]'
+      '\nEroarea calculata = %.3f'
+      % (test_theta[0], test_theta[1], test_theta[2], test_theta[3], test_theta[4], cost))
 
 # Initializam parametrii modelului cu zero
 initial_theta = np.zeros(n+1)
@@ -55,9 +44,10 @@ theta, J_history, theta_history = frl.grad_desc(x, y, initial_theta, alpha, iter
 print('Parametrii theta obtinuti cu gradient descent: {:.4f}, {:.4f}'.format(*theta))
 
 # Realizarea predictiei
-vct = [0.702, 1]
+vct = [0.702, 0.23, 0.543, 0.4637, 0.23656]
 prob = frl.sigmoid(np.dot(vct, theta))
-print('Pentru aria %.3f, pobabilitatea de boala este: %d' % (vct[0], prob))
+print('Pentru parametrii %.3f, %.3f, %.3f, %.3f, %.3f, pobabilitatea de boala este: %d'
+      % (vct[0], vct[1], vct[2], vct[3], vct[4], prob))
 
 # Afisarea functiei de eroare
 frl.plotConverge(J_history)
